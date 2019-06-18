@@ -51,7 +51,7 @@ Rewrite countBs to make use of this new function.
 const countBs = string => {
   let counter = 0;
   for (let i = 0; i < string.length; i++) { // loops through the string
-    if (string[i] === 'B') { // testing against 'B' each time
+    if (string[i] === 'B') { // testing each character against 'B'
       counter++;
     }
   }
