@@ -36,3 +36,36 @@ const sum = (rangeArray) => {
   return total;
 };
 console.log(sum(range(1, 10)));
+
+/*
+Reversing an array
+Arrays have a reverse method that changes the array by inverting the order in which its elements appear.
+For this exercise, write two functions, reverseArray and reverseArrayInPlace.
+The first, reverseArray, takes an array as argument and produces a new array that has the same elements in the inverse order.
+The second, reverseArrayInPlace, does what the reverse method does: it modifies the array given as argument by reversing its elements. Neither may use the standard reverse method.
+
+Thinking back to the notes about side effects and pure functions in the previous chapter, which variant do you expect to be useful in more situations? Which one runs faster?
+*/
+const array = ['hello', 2, 'test', 26, 9000, 'tree'];
+
+const reverseArray = array => {
+  let reversedArray = [];
+  for (let element of array) {
+    reversedArray.unshift(element);
+  }
+  return reversedArray;
+};
+console.log(reverseArray(array));
+
+const array2 = ['hello', 2, 'test', 26, 9000, 'tree'];
+
+const reverseArrayInPlace = array => {
+  let halfOfArray = Math.floor(array.length / 2); // finds half ot the length of array. Math.floor to fix for odd length arrays
+  for (let i = 0; i < halfOfArray; i++) {
+    let element = array[i]; // placeholder for one of the two elements that mirror each other in the array
+    array[i] = array[array.length - 1 - i]; // assigns the value of a index with it's mirror index
+    array[array.length - 1 - i] = element; // assign the placeholder to the mirror index now that the placeholder's value in array has been overwriten
+  }
+  return array;
+};
+console.log(reverseArrayInPlace(array2));
