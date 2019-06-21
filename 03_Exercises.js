@@ -1,58 +1,63 @@
-/*
-Minimum
-The previous chapter introduced the standard function Math.min that returns its smallest argument.
-We can build something like that now.
-Write a function min that takes two arguments and returns their minimum. */
+/* eslint-disable no-console */
+/* Minimum
+The previous chapter introduced the standard function Math.min that returns its
+smallest argument. We can build something like that now. Write a function min
+that takes two arguments and returns their minimum. */
 
-const minimum = (a, b) => a > b ? b : a;
-console.log(minimum(4, 6));
+const minimum = (a, b) => (a > b ? b : a);
 
-/*
-Recursion
-We’ve seen that % (the remainder operator) can be used to test whether a number is even or odd by using % 2 to see whether it’s divisible by two.
-Here’s another way to define whether a positive whole number is even or odd:
+console.log(minimum(7, 6));
+
+/* Recursion
+We’ve seen that % (the remainder operator) can be used to test whether a number
+is even or odd by using % 2 to see whether it’s divisible by two. Here’s
+another way to define whether a positive whole number is even or odd:
 
 Zero is even.
-
 One is odd.
-
 For any other number N, its evenness is the same as N - 2.
 
-Define a recursive function isEven corresponding to this description.
-The function should accept a single parameter (a positive, whole number) and return a Boolean.
+Define a recursive function isEven corresponding to this description. The
+function should accept a single parameter (a positive, whole number) and return
+a Boolean. Test it on 50 and 75. See how it behaves on -1. Why? Can you think
+of a way to fix this? */
 
-Test it on 50 and 75. See how it behaves on -1. Why? Can you think of a way to fix this? */
-
-const isEven = number => {
-  if (number < 0) number = Math.abs(number); // Converts negative integers to positive, so that function doesn't increase negative integer by minusing 2 (infinite loop);
-  if (number === 0) { // if number reaches 0, number is even
+const isEven = n => {
+  let number = n;
+  // prevents decreasing an already negative number (infinite loop);
+  if (number < 0) number = Math.abs(number);
+  // if number reaches 0, number is even
+  if (number === 0) {
     return true;
-  } else if (number === 1) { // if number reaches 1, number is odd
-    return false;
-  } else {
-    return isEven(number - 2); // if number is not 0 or 1, continue to subtract 2
   }
+  // if number reaches 1, number is odd
+  if (number === 1) {
+    return false;
+  }
+  // if number is not 0 or 1, continue to subtract 2
+  return isEven(number - 2);
 };
-console.log(isEven(75));
 
-/*
-Bean counting
+console.log(isEven(7));
+
+/* Bean counting
 You can get the Nth character, or letter, from a string by writing "string"[N].
-The returned value will be a string containing only one character (for example, "b").
-The first character has position 0, which causes the last one to be found at position string.length - 1.
-In other words, a two-character string has length 2, and its characters have positions 0 and 1.
-
-Write a function countBs that takes a string as its only argument and returns a number that indicates how many uppercase “B” characters there are in the string.
-
-Next, write a function called countChar that behaves like countBs, except it takes a second argument that indicates the character that is to be counted (rather than counting only uppercase “B” characters).
-Rewrite countBs to make use of this new function.
-*/
+The returned value will be a string containing only one character for example,
+"b". The first character has position 0, which causes the last one to be found
+at position string.length - 1. In other words, a two-character string has
+length 2, and its characters have positions 0 and 1. Write a function countBs
+that takes a string as its only argument and returns a number that indicates
+how many uppercase “B” characters there are in the string. Next, write a
+function called countChar that behaves like countBs, except it takes a second
+argument that indicates the character that is to be counted (rather than
+counting only uppercase “B” characters). Rewrite countBs to make use of this
+new function. */
 
 const countBs = string => {
   let counter = 0;
-  for (let i = 0; i < string.length; i++) { // loops through the string
-    if (string[i] === 'B') { // testing each character against 'B'
-      counter++;
+  for (let i = 0; i < string.length; i += 1) {
+    if (string[i] === 'B') {
+      counter += 1;
     }
   }
   return counter;
@@ -62,9 +67,9 @@ console.log(countBs('BathssjtBjtoeo'));
 
 const countChar = (string, char) => {
   let counter = 0;
-  for (let i = 0; i < string.length; i++) { // loops through string
-    if (string[i] === char) { // tests against user given char (case sensitive. char.toUpperCase() to remove sensitivity)
-      counter++;
+  for (let i = 0; i < string.length; i += 1) {
+    if (string[i] === char) {
+      counter += 1;
     }
   }
   return counter;
